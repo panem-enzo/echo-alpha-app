@@ -36,7 +36,6 @@ const App = () => {
 
       {/* Controls Section */}
       <div className="w-full flex flex-col items-center py-4">
-        {/* Joystick */}
         <Joystick />
 
         {/* Sliders */}
