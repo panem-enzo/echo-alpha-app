@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="w-full h-screen bg-white flex flex-col items-center">
       {/* Top Navbar */}
