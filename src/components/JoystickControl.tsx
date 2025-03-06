@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Joystick } from "react-joystick-component";
 
-const JoystickControl = () => {
-  const socketRef = useRef(null);
+const JoystickControl: React.FC = () => {
+  const socketRef = useRef<WebSocket | null>(null);
   const gateway = `ws://${window.location.hostname}/ws`;
 
   useEffect(() => {
@@ -11,14 +11,17 @@ const JoystickControl = () => {
     socketRef.current.onopen = () => console.log("WebSocket Connected");
     socketRef.current.onclose = () => console.log("WebSocket Disconnected");
 
-    return () => socketRef.current.close(); 
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
   }, []);
 
-  const handleMove = (event) => {
+  const handleMove = (event: { direction: any; distance: any; }) => {
     const { direction, distance } = event;
 
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      // Sending joystick data: direction and distance -> distance alters the speed
       socketRef.current.send(`joystick:${direction},${distance}`);
     }
   };
