@@ -4,10 +4,11 @@ import {
   FaBars,
   FaWifi,
   FaMicrophoneSlash,
-  FaPowerOff,
   FaCamera,
 } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
+import PowerButton from "./components/PowerButton";
+import MicButton from "./components/MicButton";
 
 const App: React.FC = () => {
   return (
@@ -65,12 +66,8 @@ const App: React.FC = () => {
 
       {/* Bottom Buttons */}
       <div className="w-full flex justify-around py-4 border-t bg-white">
-        <button className="p-3 bg-red-100 rounded-full text-red-600">
-          <FaMicrophoneSlash size={24} />
-        </button>
-        <button className="p-3 bg-gray-100 rounded-full text-gray-700">
-          <FaPowerOff size={24} />
-        </button>
+        <MicButton/>
+        <PowerButton/>
         <button className="p-3 bg-gray-100 rounded-full text-gray-700">
           <FaCamera size={24} />
         </button>
