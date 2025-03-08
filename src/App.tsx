@@ -30,7 +30,11 @@ const App: React.FC = () => {
       {/* Connection Status */}
       <div className="w-full flex items-center justify-between px-4 py-2 bg-gray-100 shadow-md">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+          {/* Pinging */}
+          <div>
+            <div className="absolute w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+            <div className="relative w-4 h-4 bg-red-500 rounded-full"></div>
+          </div>
           <FaWifi className="text-gray-600" />
           <span className="text-sm font-medium">CONNECTED</span>
         </div>
