@@ -7,8 +7,11 @@ const MicButton = () => {
 
   return (
     <Toggle
-      variant="outline"
-      className="w-12 h-12 rounded-full bg-gray-100"
+      className={`w-12 h-12 rounded-full border shadow ${
+        isToggled
+          ? "bg-gray-100 hover:bg-gray-200 border-gray-400"
+          : "bg-red-50 hover:bg-red-100 border-red-400"
+      }`}
       onClick={() => setIsToggled(!isToggled)}
     >
       {isToggled ? (
