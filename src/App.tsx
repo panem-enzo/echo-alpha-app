@@ -10,6 +10,7 @@ import PowerButton from "./components/PowerButton";
 import MicButton from "./components/MicButton";
 import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import TopSwitch from "./components/TopSwitch";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -40,7 +41,8 @@ const App: React.FC = () => {
           <div className="max-w-10 h-auto">
             <img src="/echo.png" alt="echo" />
           </div>
-          <FaCog className="text-xl text-gray-700" />
+          
+          <TopSwitch/>
         </div>
 
         {/* Sidebar Component */}

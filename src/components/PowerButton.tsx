@@ -12,4 +12,4 @@ const PowerButton = () => {
     );
   };
   
-  export default PowerButton;
+export default PowerButton;
