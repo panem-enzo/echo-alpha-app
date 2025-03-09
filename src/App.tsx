@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import TopSwitch from "./components/TopSwitch";
+import CameraButton from "./components/CameraButton";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -100,12 +101,13 @@ const App: React.FC = () => {
         </div>
 
         {/* Bottom Buttons */}
-        <div className="w-full flex justify-around py-4 border-t bg-white">
+        <div className="w-full flex justify-around items-center py-4 border-t bg-white">
           <MicButton />
           <PowerButton />
-          <button className="p-3 bg-gray-100 rounded-full text-gray-700">
+          <CameraButton/>
+          {/* <button className="p-3 bg-gray-100 rounded-full text-gray-700">
             <FaCamera size={24} />
-          </button>
+          </button> */}
         </div>
       </div>
     </SidebarProvider>
