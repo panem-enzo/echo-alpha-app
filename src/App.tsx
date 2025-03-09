@@ -1,14 +1,13 @@
 import React from "react";
-import {
-  FaCog,
-  FaBars,
-  FaWifi,
-  FaCamera,
-} from "react-icons/fa";
+import { FaBars, FaWifi, FaCamera } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import PowerButton from "./components/PowerButton";
 import MicButton from "./components/MicButton";
-import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import TopSwitch from "./components/TopSwitch";
 
@@ -16,11 +15,17 @@ const AppSidebar: React.FC = () => {
   return (
     <Sidebar>
       <div className="p-4 w-64 h-full bg-gray-100 border-r">
-        <h2 className="text-lg font-bold">Sidebar Menu</h2>
+        <h2 className="text-lg font-bold">ECHO-ALPHA V1.0.0</h2>
         <ul className="mt-4 space-y-2">
-          <li><Button variant="ghost">Dashboard</Button></li>
-          <li><Button variant="ghost">Settings</Button></li>
-          <li><Button variant="ghost">Logout</Button></li>
+          <li>
+            <Button variant="ghost">Dashboard</Button>
+          </li>
+          <li>
+            <Button variant="ghost">Settings</Button>
+          </li>
+          <li>
+            <Button variant="ghost">Logout</Button>
+          </li>
         </ul>
       </div>
     </Sidebar>
@@ -41,8 +46,8 @@ const App: React.FC = () => {
           <div className="max-w-10 h-auto">
             <img src="/echo.png" alt="echo" />
           </div>
-          
-          <TopSwitch/>
+
+          <TopSwitch />
         </div>
 
         {/* Sidebar Component */}
