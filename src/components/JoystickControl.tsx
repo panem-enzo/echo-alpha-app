@@ -35,7 +35,7 @@ const JoystickControl: React.FC = () => {
   return (
     <div>
       <Joystick
-        size={100}
+        size={150}
         baseColor="#bddcff"
         stickColor="#51a2ff"
         move={handleMove}

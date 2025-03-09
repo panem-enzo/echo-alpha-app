@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import TopSwitch from "./components/TopSwitch";
 import CameraButton from "./components/CameraButton";
+import { Separator } from "@/components/ui/separator";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -100,8 +101,9 @@ const App: React.FC = () => {
           </div>
         </div>
 
+        <Separator className="my-4 h-1 bg-gray-300" />
         {/* Bottom Buttons */}
-        <div className="w-full flex justify-around items-center py-4 border-t bg-white">
+        <div className="w-full flex justify-around items-center py-4 bg-white">
           <MicButton />
           <PowerButton />
           <CameraButton/>
