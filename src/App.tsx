@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import TopSwitch from "./components/TopSwitch";
 import CameraButton from "./components/CameraButton";
 import { Separator } from "@/components/ui/separator";
+import FlashlightButton from "./components/FlashlightButton";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -105,11 +106,9 @@ const App: React.FC = () => {
         {/* Bottom Buttons */}
         <div className="w-full flex justify-around items-center py-4 bg-white">
           <MicButton />
-          <PowerButton />
+          <FlashlightButton/>
+          {/* <PowerButton /> */}
           <CameraButton/>
-          {/* <button className="p-3 bg-gray-100 rounded-full text-gray-700">
-            <FaCamera size={24} />
-          </button> */}
         </div>
       </div>
     </SidebarProvider>
