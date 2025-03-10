@@ -7,8 +7,8 @@ const CameraButton = () => {
 
   return (
     <Button
-      className={`w-18 h-18 flex items-center justify-center rounded-full shadow ${
-        isActive ? "bg-gray-200" : "bg-gray-100 hover:bg-gray-200"
+      className={`w-18 h-18 flex items-center justify-center rounded-full ${
+        isActive ? "bg-gray-200 inset-shadow-sm" : "bg-gray-100 hover:bg-gray-200 shadow-sm"
       }`}
       onMouseDown={() => setActive(true)}
       onMouseUp={() => setActive(false)}

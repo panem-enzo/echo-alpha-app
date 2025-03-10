@@ -67,10 +67,10 @@ const App: React.FC = () => {
               <div className="relative w-4 h-4 bg-red-500 rounded-full"></div>
             </div>
             <FaWifi className="text-gray-600" />
-            <span className="text-sm font-medium">CONNECTED:</span>
+            <span className="text-sm font-medium text-black">CONNECTED</span>
             <span className="text-sm text-gray-700">
-            {window.location.hostname}
-          </span>
+              {window.location.hostname}
+            </span>
           </div>
         </div>
 
@@ -83,9 +83,9 @@ const App: React.FC = () => {
         {/* Bottom Buttons */}
         <div className="w-full flex justify-around items-center py-4 bg-white">
           <MicButton />
-          <FlashlightButton/>
+          <FlashlightButton />
           {/* <PowerButton /> */}
-          <CameraButton/>
+          <CameraButton />
         </div>
       </div>
     </SidebarProvider>
