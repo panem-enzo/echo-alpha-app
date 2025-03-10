@@ -7,7 +7,7 @@ const FlashlightButton = () => {
 
   return (
     <Toggle
-      className={`w-24 h-24 rounded-[30px] shadow bg-gray-100 hover:bg-gray-200`}
+      className={`w-24 h-24 rounded-[30px] ${isToggled ? "shadow-sm": "inset-shadow-sm"} bg-gray-100 hover:bg-gray-200`}
       onClick={() => setIsToggled(!isToggled)}
     >
       {isToggled ? (
