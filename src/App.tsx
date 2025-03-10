@@ -1,7 +1,6 @@
 import React from "react";
 import { FaBars, FaWifi, FaCamera } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
-import PowerButton from "./components/PowerButton";
 import MicButton from "./components/MicButton";
 import {
   SidebarProvider,
@@ -68,38 +67,16 @@ const App: React.FC = () => {
               <div className="relative w-4 h-4 bg-red-500 rounded-full"></div>
             </div>
             <FaWifi className="text-gray-600" />
-            <span className="text-sm font-medium">CONNECTED</span>
-          </div>
-          <span className="text-sm text-gray-700">
+            <span className="text-sm font-medium">CONNECTED:</span>
+            <span className="text-sm text-gray-700">
             {window.location.hostname}
           </span>
+          </div>
         </div>
 
         {/* Controls Section */}
         <div className="w-full flex flex-col items-center py-4">
           <Joystick />
-
-          {/* Sliders */}
-          <div className="w-full flex justify-around mt-4 px-8">
-            <div className="flex flex-col items-center">
-              <span className="text-gray-600 mb-2">🔊</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                className="slider w-12 rotate-[-90deg]"
-              />
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-gray-600 mb-2">↕️</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                className="slider w-12 rotate-[-90deg]"
-              />
-            </div>
-          </div>
         </div>
 
         <Separator className="my-4 h-1 bg-gray-300" />
