@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBars, FaWifi, FaCamera } from "react-icons/fa";
+import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
 import {

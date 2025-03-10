@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Joystick } from "react-joystick-component";
+import Joystick, { Direction, DirectionCount, IJoystickChangeValue } from "rc-joystick";
 
 const JoystickControl: React.FC = () => {
   const socketRef = useRef<WebSocket | null>(null);
@@ -18,28 +18,33 @@ const JoystickControl: React.FC = () => {
     };
   }, []);
 
-  const handleMove = (event: { direction: any; distance: any; }) => {
+  const handleChange = (event: IJoystickChangeValue) => {
     const { direction, distance } = event;
+    console.log(`Joystick moved: ${direction}, Distance: ${distance}`);
 
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(`joystick:${direction},${distance}`);
     }
   };
 
-  const handleStop = () => {
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send("joystick:STOP,0");
+  const handleDirectionChange = (direction: Direction) => {
+    if (direction === "Center") {
+      console.log("Joystick released");
+
+      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+        socketRef.current.send("joystick:STOP,0");
+      }
     }
   };
 
   return (
     <div>
       <Joystick
-        size={150}
-        baseColor="#bddcff"
-        stickColor="#51a2ff"
-        move={handleMove}
-        stop={handleStop}
+        baseRadius={80} // Adjust joystick base size
+        controllerRadius={40} // Adjust joystick knob size
+        directionCount={DirectionCount.Nine} // Uses directions (Top, Bottom, Left, Right, Center)
+        onChange={handleChange} // Handle movement
+        onDirectionChange={handleDirectionChange} // Detect stop (Center)
       />
     </div>
   );
