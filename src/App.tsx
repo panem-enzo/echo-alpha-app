@@ -12,6 +12,7 @@ import TopSwitch from "./components/TopSwitch";
 import CameraButton from "./components/CameraButton";
 import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
+import BatteryIndicator from "./components/BatteryIndicator";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -72,6 +73,7 @@ const App: React.FC = () => {
               {window.location.hostname}
             </span>
           </div>
+          <BatteryIndicator/>
         </div>
 
         {/* Controls Section */}
