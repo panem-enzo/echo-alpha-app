@@ -23,16 +23,16 @@ const JoystickControl: React.FC = () => {
   }, []);
 
   const handleChange = (event: IJoystickChangeValue) => {
-    const { distance, angle } = event;
+    const { distance, angle, direction } = event;
     const angleInDegrees = angle ?? 0;
     const radians = (angleInDegrees * Math.PI) / 180;
 
     const x = distance * Math.cos(radians);
     const y = distance * Math.sin(radians);
-    console.log(`joystick:${x},${y}`);
+    console.log(JSON.stringify({ "direction": direction, "x": x, "y": y }));
 
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(`joystick:${x},${y}`);
+      socketRef.current.send(JSON.stringify({ "direction": direction, "x": x, "y": y }));
     }
   };
 
@@ -44,7 +44,7 @@ const JoystickControl: React.FC = () => {
         socketRef.current &&
         socketRef.current.readyState === WebSocket.OPEN
       ) {
-        socketRef.current.send("joystick:STOP,0");
+        socketRef.current.send(JSON.stringify({ "direction": "Stop", "x": 0, "y": 0 }));
       }
     }
   };
