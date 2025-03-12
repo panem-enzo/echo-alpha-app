@@ -2,7 +2,7 @@ import { Switch } from "@/components/ui/switch"
 
 const TopSwitch = () => {
   return (
-    <Switch/>
+    <Switch className="cursor-pointer"/>
   );
 };
 
