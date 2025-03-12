@@ -1,5 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import Joystick, { Direction, DirectionCount, IJoystickChangeValue } from "rc-joystick";
+import Joystick, {
+  Direction,
+  DirectionCount,
+  IJoystickChangeValue,
+} from "rc-joystick";
 
 const JoystickControl: React.FC = () => {
   const socketRef = useRef<WebSocket | null>(null);
@@ -19,11 +23,16 @@ const JoystickControl: React.FC = () => {
   }, []);
 
   const handleChange = (event: IJoystickChangeValue) => {
-    const { direction, distance } = event;
-    console.log(`Joystick moved: ${direction}, Distance: ${distance}`);
+    const { distance, angle, direction } = event;
+    const angleInDegrees = angle ?? 0;
+    const radians = (angleInDegrees * Math.PI) / 180;
+
+    const x = distance * Math.cos(radians);
+    const y = distance * Math.sin(radians);
+    console.log(JSON.stringify({ "direction": direction, "x": x, "y": y }));
 
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(`joystick:${direction},${distance}`);
+      socketRef.current.send(JSON.stringify({ "direction": direction, "x": x, "y": y }));
     }
   };
 
@@ -31,8 +40,11 @@ const JoystickControl: React.FC = () => {
     if (direction === "Center") {
       console.log("Joystick released");
 
-      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-        socketRef.current.send("joystick:STOP,0");
+      if (
+        socketRef.current &&
+        socketRef.current.readyState === WebSocket.OPEN
+      ) {
+        socketRef.current.send(JSON.stringify({ "direction": "Stop", "x": 0, "y": 0 }));
       }
     }
   };
@@ -40,11 +52,11 @@ const JoystickControl: React.FC = () => {
   return (
     <div>
       <Joystick
-        baseRadius={80} // Adjust joystick base size
-        controllerRadius={40} // Adjust joystick knob size
-        directionCount={DirectionCount.Nine} // Uses directions (Top, Bottom, Left, Right, Center)
-        onChange={handleChange} // Handle movement
-        onDirectionChange={handleDirectionChange} // Detect stop (Center)
+        baseRadius={80}
+        controllerRadius={40}
+        directionCount={DirectionCount.Nine} // Uses directions (Top, RightTop, TopLeft, Bottom, RightBottom, LeftBottom, Left, Right, Center)
+        onChange={handleChange}
+        onDirectionChange={handleDirectionChange}
       />
     </div>
   );
