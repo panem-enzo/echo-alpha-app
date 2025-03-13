@@ -1,5 +1,5 @@
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
-import { Calendar, Gauge, Inbox, Info, Logs, Settings } from "lucide-react"
+import { Gauge, Info, Logs, Settings } from "lucide-react"
 
 
 // Menu items.
