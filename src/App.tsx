@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "./app/echo.png";
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
@@ -27,7 +28,7 @@ const App: React.FC = () => {
           </SidebarTrigger>
 
           <div className="max-w-10 h-auto">
-            <img src="/echo.png" alt="echo" />
+            <img src={logo.src} />
           </div>
 
           <TopSwitch />
