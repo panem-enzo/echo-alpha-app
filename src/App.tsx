@@ -4,45 +4,25 @@ import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
 import {
   SidebarProvider,
-  Sidebar,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
 import TopSwitch from "./components/TopSwitch";
 import CameraButton from "./components/CameraButton";
 import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
 import BatteryIndicator from "./components/BatteryIndicator";
-
-const AppSidebar: React.FC = () => {
-  return (
-    <Sidebar>
-      <div className="p-4 w-64 h-full bg-gray-100 border-r">
-        <h2 className="text-lg font-bold">ECHO-ALPHA V1.0.0</h2>
-        <ul className="mt-4 space-y-2">
-          <li>
-            <Button variant="ghost">Dashboard</Button>
-          </li>
-          <li>
-            <Button variant="ghost">Settings</Button>
-          </li>
-          <li>
-            <Button variant="ghost">Logout</Button>
-          </li>
-        </ul>
-      </div>
-    </Sidebar>
-  );
-};
+import AppSidebar from "./components/app-sidebar";
 
 const App: React.FC = () => {
   return (
     <SidebarProvider>
+      {/* Sidebar Component */}
+      <AppSidebar/>
       <div className="w-full h-screen bg-white flex flex-col items-center">
         {/* Top Navbar */}
         <div className="w-full flex items-center justify-between px-4 py-2 bg-white shadow-md">
           {/* Sidebar Trigger Button */}
-          <SidebarTrigger>
+          <SidebarTrigger className="hover:bg-gray-100">
             <FaBars className="text-xl text-gray-700 cursor-pointer" />
           </SidebarTrigger>
 
@@ -52,9 +32,6 @@ const App: React.FC = () => {
 
           <TopSwitch />
         </div>
-
-        {/* Sidebar Component */}
-        <AppSidebar />
 
         {/* Robot Video Feed */}
         <div className="w-full h-1/3 bg-gray-300 flex justify-center items-center"></div>
