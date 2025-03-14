@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./app/echo.png";
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
@@ -28,7 +27,7 @@ const App: React.FC = () => {
           </SidebarTrigger>
 
           <div className="max-w-10 h-auto">
-            <img src={logo.src} />
+            {/* <img src={logo.src} /> */}
           </div>
 
           <TopSwitch />
@@ -48,7 +47,6 @@ const App: React.FC = () => {
             <FaWifi className="text-gray-600" />
             <span className="text-sm font-medium text-black">CONNECTED</span>
             <span className="text-sm text-gray-700">
-              {window.location.hostname}
             </span>
           </div>
           <BatteryIndicator/>
