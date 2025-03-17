@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RotateCw } from "lucide-react";
 
-const RotateDisplay = () => {
+const RotateDisplay: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
   const [isActive, setActive] = useState(false);
 
   return (
@@ -15,6 +15,7 @@ const RotateDisplay = () => {
       onMouseLeave={() => setActive(false)}
       onTouchStart={() => setActive(true)} // Mobile: When finger touches
       onTouchEnd={() => setActive(false)} // Mobile: When finger lifts
+      onClick={toggleRotation}
     >
       <RotateCw className="size-9 stroke-[2]" color="#394051" />
     </Button>

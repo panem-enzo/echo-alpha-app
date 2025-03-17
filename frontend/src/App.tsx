@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
-import RotateDisplay from "./components/MicButton";
+import MicButton from "./components/MicButton";
 import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import TopSwitch from "./components/TopSwitch";
-import CameraButton from "./components/RotateButton";
+import RotateDisplay from "./components/RotateButton";
 import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
 import BatteryIndicator from "./components/BatteryIndicator";
 import AppSidebar from "./components/app-sidebar";
 
-const App: React.FC = () => {
+const App: React.FC <{ toggleRotation: () => void }> = ({ toggleRotation }) => {
+
   return (
     <SidebarProvider>
       {/* Sidebar Component */}
@@ -61,10 +62,9 @@ const App: React.FC = () => {
         <Separator className="my-4 h-1 bg-gray-300" />
         {/* Bottom Buttons */}
         <div className="w-full flex justify-around items-center py-4 bg-white">
-          <RotateDisplay />
+          <MicButton />
           <FlashlightButton />
-          {/* <PowerButton /> */}
-          <CameraButton />
+          <RotateDisplay toggleRotation={toggleRotation}/>
         </div>
       </div>
     </SidebarProvider>

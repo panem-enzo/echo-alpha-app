@@ -1,11 +1,10 @@
-import { Mic, RotateCcw, Wifi, User, Video } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Wifi, User } from "lucide-react";
 import Joystick from "./JoystickControl";
 import MicButton from "./MicButton";
 import FlashlightButton from "./FlashlightButton";
 import RotateDisplay from "./RotateButton";
 
-export default function LandscapeUI() {
+const LandscapeUI: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Video Stream */}
@@ -34,10 +33,12 @@ export default function LandscapeUI() {
 
       {/* Bottom Controls */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6">
-        <MicButton/>
-        <FlashlightButton/>
-        <RotateDisplay/>
+        <MicButton />
+        <FlashlightButton />
+        <RotateDisplay toggleRotation={toggleRotation} />
       </div>
     </div>
   );
 }
+
+export default LandscapeUI;
