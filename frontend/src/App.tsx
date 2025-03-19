@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";

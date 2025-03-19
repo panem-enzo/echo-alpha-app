@@ -1,24 +1,28 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { RotateCw } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle";
+import { Smartphone } from "lucide-react";
 
-const RotateDisplay: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
-  const [isActive, setActive] = useState(false);
+const RotateDisplay: React.FC<{ toggleRotation: () => void }> = ({
+  toggleRotation,
+}) => {
+  const [isToggled, setIsToggled] = useState(false);
 
   return (
-    <Button
-      className={`w-18 h-18 flex items-center justify-center rounded-full ${
-        isActive ? "bg-gray-200 inset-shadow-sm" : "bg-gray-100 hover:bg-gray-200 shadow-sm"
+    <Toggle
+      className={`w-18 h-18 rounded-full bg-gray-100 hover:bg-gray-200 ${
+        isToggled
+          ? "inset-shadow-sm"
+          : "shadow-sm"
       }`}
-      onMouseDown={() => setActive(true)}
-      onMouseUp={() => setActive(false)}
-      onMouseLeave={() => setActive(false)}
-      onTouchStart={() => setActive(true)} // Mobile: When finger touches
-      onTouchEnd={() => setActive(false)} // Mobile: When finger lifts
-      onClick={toggleRotation}
+      onClick={() => {
+        setIsToggled(!isToggled);
+        toggleRotation();
+      }}
     >
-      <RotateCw className="size-9 stroke-[2]" color="#394051" />
-    </Button>
+      <div className="rotate-90">
+        <Smartphone className="size-12 stroke-2" color="#394051"/>
+      </div>
+    </Toggle>
   );
 };
 
