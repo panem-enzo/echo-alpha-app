@@ -11,9 +11,10 @@ const LandscapeUI: React.FC<{ toggleRotation: () => void }> = ({
     <div className="relative w-full h-screen bg-black">
       {/* Video Stream */}
       <div className="absolute inset-0">
-        {/* <video className="w-screen h-screen object-cover rotate-90" autoPlay muted loop>
-          <source src="/test_footage.mp4" type="video/mp4" />
-        </video> */}
+        <img
+          src={`http://${window.location.hostname}:81/stream`}
+          alt="ECHO Live Feed"
+        ></img>
       </div>
 
       {/* Top Right Status Indicators */}
