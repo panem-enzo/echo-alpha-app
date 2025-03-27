@@ -2,22 +2,19 @@ import React from "react";
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
-import {
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import TopSwitch from "./components/TopSwitch";
-import CameraButton from "./components/CameraButton";
+import RotateDisplay from "./components/RotateButton";
 import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
 import BatteryIndicator from "./components/BatteryIndicator";
 import AppSidebar from "./components/app-sidebar";
 
-const App: React.FC = () => {
+const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
   return (
     <SidebarProvider>
       {/* Sidebar Component */}
-      <AppSidebar/>
+      <AppSidebar />
       <div className="w-full h-screen bg-white flex flex-col items-center">
         {/* Top Navbar */}
         <div className="w-full flex items-center justify-between px-4 py-2 bg-white shadow-md">
@@ -34,7 +31,12 @@ const App: React.FC = () => {
         </div>
 
         {/* Robot Video Feed */}
-        <div className="w-full h-1/3 bg-gray-300 flex justify-center items-center"></div>
+        <div className="w-full h-1/3 bg-gray-300 flex justify-center items-center">
+          <img
+            src={`http://${window.location.hostname}:81/stream`}
+            alt="ECHO Live Feed"
+          ></img>
+        </div>
 
         {/* Connection Status */}
         <div className="w-full flex items-center justify-between px-4 py-2 bg-gray-100 shadow-md">
@@ -50,7 +52,7 @@ const App: React.FC = () => {
               {window.location.hostname}
             </span>
           </div>
-          <BatteryIndicator/>
+          <BatteryIndicator />
         </div>
 
         {/* Controls Section */}
@@ -63,8 +65,7 @@ const App: React.FC = () => {
         <div className="w-full flex justify-around items-center py-4 bg-white">
           <MicButton />
           <FlashlightButton />
-          {/* <PowerButton /> */}
-          <CameraButton />
+          <RotateDisplay toggleRotation={toggleRotation} />
         </div>
       </div>
     </SidebarProvider>

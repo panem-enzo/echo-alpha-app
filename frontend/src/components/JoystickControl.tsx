@@ -52,11 +52,12 @@ const JoystickControl: React.FC = () => {
   return (
     <div>
       <Joystick
-        baseRadius={80}
-        controllerRadius={40}
+        baseRadius={100}
+        controllerRadius={60}
         directionCount={DirectionCount.Nine} // Uses directions (Top, RightTop, TopLeft, Bottom, RightBottom, LeftBottom, Left, Right, Center)
         onChange={handleChange}
         onDirectionChange={handleDirectionChange}
+        throttle={0}
       />
     </div>
   );
