@@ -57,7 +57,7 @@ const JoystickControl: React.FC = () => {
         directionCount={DirectionCount.Nine} // Uses directions (Top, RightTop, TopLeft, Bottom, RightBottom, LeftBottom, Left, Right, Center)
         onChange={handleChange}
         onDirectionChange={handleDirectionChange}
-        throttle={1000}
+        throttle={0}
       />
     </div>
   );
