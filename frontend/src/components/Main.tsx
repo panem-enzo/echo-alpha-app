@@ -1,14 +1,14 @@
 import { useState } from "react";
 import App from "../App";
-import LandscapeUI from "./LandscapeUI";
+import ExpandUI from "./ExpandUI";
 
 const Main = () => {
   const [isLandscape, setIsLandscape] = useState(false);
 
   return isLandscape ? (
-    <LandscapeUI toggleRotation={() => setIsLandscape(false)} />
+    <ExpandUI toggleExpand={() => setIsLandscape(false)} />
   ) : (
-    <App toggleRotation={() => setIsLandscape(true)} />
+    <App toggleExpand={() => setIsLandscape(true)} />
   );
 };
 

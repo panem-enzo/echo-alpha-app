@@ -4,14 +4,14 @@ import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import TopSwitch from "./components/TopSwitch";
-import RotateDisplay from "./components/RotateButton";
+import ExpandDisplay from "./components/ExpandButton";
 import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
 import BatteryIndicator from "./components/BatteryIndicator";
 import AppSidebar from "./components/app-sidebar";
 import VideoFeed from "./components/VideoFeed";
 
-const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
+const App: React.FC<{ toggleExpand: () => void }> = ({ toggleExpand }) => {
   return (
     <SidebarProvider>
       {/* Sidebar Component */}
@@ -63,7 +63,7 @@ const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
         <div className="w-full flex justify-around items-center py-4 bg-white">
           <MicButton />
           <FlashlightButton />
-          <RotateDisplay toggleRotation={toggleRotation} />
+          <ExpandDisplay toggleExpand={toggleExpand} />
         </div>
       </div>
     </SidebarProvider>
