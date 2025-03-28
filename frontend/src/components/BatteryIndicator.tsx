@@ -7,54 +7,42 @@ const BatteryIndicator: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev <= 0) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prev - 1;
-      });
+      setProgress((prev) => (prev <= 0 ? 0 : prev - 1));
     }, 500);
 
     return () => clearInterval(interval);
   }, []);
 
-  const getColor = () => {
-    if (progress <= 100 && progress > 66) {
-      return "green-500/70";
-    } else if (progress <= 66 && progress > 32) {
-      return "yellow-400";
-    } else if (progress <= 32 && progress > 0) {
-      return "red-400/70";
-    } else {
-      return "black";
-    }
+  const getColorClass = (): string => {
+    if (progress > 66) return "text-green-500/70";
+    if (progress > 32) return "text-yellow-400";
+    if (progress > 0) return "text-red-400/70";
+    return "text-white";
   };
 
-  const getBatteryLevel = () => {
-    const classPos = `absolute top-1/2 left-2 -translate-y-1/2 w-6 h-6 text-${getColor()}`;
-    if (progress <= 100 && progress > 66) {
-      return <BatteryFull className={`${classPos}`} />;
-    } else if (progress <= 66 && progress > 32) {
-      return <BatteryMedium className={`${classPos}`} />;
-    } else if (progress <= 32 && progress > 0) {
-      return <BatteryLow className={`${classPos}`} />;
-    } else {
-      return <PlugZap className={`animate-pulse ${classPos}`} />;
-    }
+  const Icon = () => {
+    if (progress > 66) return <BatteryFull className={iconClass} />;
+    if (progress > 32) return <BatteryMedium className={iconClass} />;
+    if (progress > 0) return <BatteryLow className={iconClass} />;
+    return "";
   };
+
+  const colorClass = getColorClass();
+  const iconClass = `absolute top-1/2 left-2 -translate-y-1/2 w-6 h-6 ${colorClass}`;
 
   return (
     <div>
       <div className="relative w-24 md:w-32 lg:w-48">
-        <Progress value={progress} className="h-8 shadow-sm inset-shadow-sm" />
-
-        {getBatteryLevel()}
-
+        <Progress value={progress} className="h-6 shadow-sm inset-shadow-sm" />
+        <Icon />
         <span
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-medium text-${getColor()}`}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-medium ${colorClass}`}
         >
-          {progress}%
+          {progress === 0 ? (
+            <PlugZap className={`animate-pulse`} />
+          ) : (
+            `${progress}%`
+          )}
         </span>
       </div>
     </div>
