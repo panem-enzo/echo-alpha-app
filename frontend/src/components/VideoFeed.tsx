@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Spinner = () => (
-  <div className="w-10 h-10 border-6 border-gray-400/70 border-t-gray-500/80 rounded-full animate-spin" />
+  <div className="w-10 h-10 border-6 border-gray-400/70 border-t-blue-500 rounded-full animate-spin" />
 );
 
 const VideoFeed: React.FC = () => {
