@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import FlashlightButton from "./components/FlashlightButton";
 import BatteryIndicator from "./components/BatteryIndicator";
 import AppSidebar from "./components/app-sidebar";
+import VideoFeed from "./components/VideoFeed";
 
 const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
   return (
@@ -17,7 +18,7 @@ const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
       <AppSidebar />
       <div className="w-full h-screen bg-white flex flex-col items-center">
         {/* Top Navbar */}
-        <div className="w-full flex items-center justify-between px-4 py-2 bg-white shadow-md">
+        <div className="w-full flex items-center justify-between px-4 py-4 bg-white shadow-md">
           {/* Sidebar Trigger Button */}
           <SidebarTrigger className="hover:bg-gray-100">
             <FaBars className="text-xl text-gray-700 cursor-pointer" />
@@ -32,10 +33,7 @@ const App: React.FC<{ toggleRotation: () => void }> = ({ toggleRotation }) => {
 
         {/* Robot Video Feed */}
         <div className="w-full h-1/3 bg-gray-300 flex justify-center items-center">
-          <img
-            src={`http://${window.location.hostname}:81/stream`}
-            alt="ECHO Live Feed"
-          ></img>
+          <VideoFeed/>
         </div>
 
         {/* Connection Status */}
