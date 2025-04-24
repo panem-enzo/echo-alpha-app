@@ -1,7 +1,8 @@
+import wsManager from "../utils/wsManager";
+
 let audioContext: AudioContext | null = null;
 let micStream: MediaStreamAudioSourceNode | null = null;
 let processor: ScriptProcessorNode | null = null;
-let ws: WebSocket;
 
 export async function startMicStream(): Promise<void> {
   try {
@@ -17,7 +18,7 @@ export async function startMicStream(): Promise<void> {
     processor.onaudioprocess = (event: AudioProcessingEvent): void => {
       const pcmData: Float32Array = event.inputBuffer.getChannelData(0);
       const int16Data: Int16Array = float32ToInt16(pcmData);
-      sendAudio(int16Data);
+      wsManager.send(int16Data.buffer); // use shared wsManager
     };
   } catch (err) {
     console.error("Error accessing microphone:", err);
@@ -31,15 +32,4 @@ function float32ToInt16(float32Array: Float32Array): Int16Array {
     int16Array[i] = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
   }
   return int16Array;
-}
-
-function sendAudio(int16Array: Int16Array): void {
-  if (ws && ws.readyState === WebSocket.OPEN) {
-    ws.send(int16Array.buffer);
-  }
-}
-
-// Websocket connection
-export function setWebSocket(socket: WebSocket): void {
-  ws = socket;
 }

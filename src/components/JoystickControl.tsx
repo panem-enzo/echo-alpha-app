@@ -1,24 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Joystick, {
   Direction,
   DirectionCount,
   IJoystickChangeValue,
 } from "rc-joystick";
+import wsManager from "../utils/wsManager";
+import { startMicStream } from "../audio/mic-audio-stream";
 
 const JoystickControl: React.FC = () => {
-  const socketRef = useRef<WebSocket | null>(null);
-  const gateway = `ws://${window.location.hostname}/ws`;
-
   useEffect(() => {
-    socketRef.current = new WebSocket(gateway);
-
-    socketRef.current.onopen = () => console.log("WebSocket Connected");
-    socketRef.current.onclose = () => console.log("WebSocket Disconnected");
+    wsManager.connect();
 
     return () => {
-      if (socketRef.current) {
-        socketRef.current.close();
-      }
+      wsManager.close();
     };
   }, []);
 
@@ -29,24 +23,18 @@ const JoystickControl: React.FC = () => {
 
     const x = distance * Math.cos(radians);
     const y = distance * Math.sin(radians);
-    console.log(JSON.stringify({ "direction": direction, "x": x, "y": y }));
 
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ "direction": direction, "x": x, "y": y }));
-    }
+    wsManager.send(JSON.stringify({ direction, x, y }));
   };
 
   const handleDirectionChange = (direction: Direction) => {
     if (direction === "Center") {
-      console.log("Joystick released");
-
-      if (
-        socketRef.current &&
-        socketRef.current.readyState === WebSocket.OPEN
-      ) {
-        socketRef.current.send(JSON.stringify({ "direction": "Stop", "x": 0, "y": 0 }));
-      }
+      wsManager.send(JSON.stringify({ direction: "Stop", x: 0, y: 0 }));
     }
+  };
+
+  const handleStartMic = () => {
+    startMicStream();
   };
 
   return (
@@ -54,11 +42,12 @@ const JoystickControl: React.FC = () => {
       <Joystick
         baseRadius={100}
         controllerRadius={60}
-        directionCount={DirectionCount.Nine} // Uses directions (Top, RightTop, TopLeft, Bottom, RightBottom, LeftBottom, Left, Right, Center)
+        directionCount={DirectionCount.Nine}
         onChange={handleChange}
         onDirectionChange={handleDirectionChange}
         throttle={0}
       />
+      <button onClick={handleStartMic}>Start Microphone</button>
     </div>
   );
 };
