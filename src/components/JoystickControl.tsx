@@ -5,7 +5,6 @@ import Joystick, {
   IJoystickChangeValue,
 } from "rc-joystick";
 import wsManager from "../utils/wsManager";
-import { startMicStream } from "../audio/mic-audio-stream";
 
 const JoystickControl: React.FC = () => {
   useEffect(() => {
@@ -33,10 +32,6 @@ const JoystickControl: React.FC = () => {
     }
   };
 
-  const handleStartMic = () => {
-    startMicStream();
-  };
-
   return (
     <div>
       <Joystick
@@ -47,7 +42,6 @@ const JoystickControl: React.FC = () => {
         onDirectionChange={handleDirectionChange}
         throttle={0}
       />
-      <button onClick={handleStartMic}>Start Microphone</button>
     </div>
   );
 };

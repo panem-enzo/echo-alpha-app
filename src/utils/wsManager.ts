@@ -1,3 +1,5 @@
+import { startMicStream } from "../audio/mic-audio-stream";
+
 type MessageHandler = (message: MessageEvent) => void;
 
 class WebSocketManager {
@@ -14,6 +16,9 @@ class WebSocketManager {
 
     this.socket.onopen = () => {
       console.log("WebSocket connected to", this.url);
+
+      // Start mic as soon as socket connects
+      startMicStream();
     };
 
     this.socket.onclose = () => {
