@@ -6,6 +6,7 @@ let processor: ScriptProcessorNode | null = null;
 
 export async function startMicStream(): Promise<void> {
   try {
+    console.log("Mic started");
     const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
     audioContext = new AudioContext({ sampleRate: 16000 });
 
@@ -19,6 +20,7 @@ export async function startMicStream(): Promise<void> {
       const pcmData: Float32Array = event.inputBuffer.getChannelData(0);
       const int16Data: Int16Array = float32ToInt16(pcmData);
       wsManager.send(int16Data.buffer); // use shared wsManager
+      console.log("Sending PCM chunk:", int16Data.length, "samples");
     };
   } catch (err) {
     console.error("Error accessing microphone:", err);

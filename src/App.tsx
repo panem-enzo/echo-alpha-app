@@ -1,4 +1,6 @@
 import React from "react";
+
+// Component imports
 import { FaBars, FaWifi } from "react-icons/fa";
 import Joystick from "./components/JoystickControl";
 import MicButton from "./components/MicButton";
@@ -12,6 +14,7 @@ import AppSidebar from "./components/app-sidebar";
 import VideoFeed from "./components/VideoFeed";
 
 const App: React.FC<{ toggleExpand: () => void }> = ({ toggleExpand }) => {
+
   return (
     <SidebarProvider>
       {/* Sidebar Component */}
@@ -33,7 +36,7 @@ const App: React.FC<{ toggleExpand: () => void }> = ({ toggleExpand }) => {
 
         {/* Robot Video Feed */}
         <div className="w-full h-1/3 bg-gray-300 flex justify-center items-center">
-          <VideoFeed/>
+          <VideoFeed />
         </div>
 
         {/* Connection Status */}

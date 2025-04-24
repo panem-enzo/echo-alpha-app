@@ -7,8 +7,21 @@ class WebSocketManager {
   private url: string;
   private onMessage?: MessageHandler;
 
-  constructor(url: string) {
-    this.url = url;
+  constructor() {
+    this.url = this.resolveUrl();
+  }
+
+  private resolveUrl(): string {
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+
+    // Local dev (Vite)
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return `ws://${hostname}:${port || 5173}/ws`;
+    }
+
+    // Production / ESP32 mode (serving frontend from ESP32 itself)
+    return `ws://${hostname}/ws`;
   }
 
   connect(): void {
@@ -16,8 +29,6 @@ class WebSocketManager {
 
     this.socket.onopen = () => {
       console.log("WebSocket connected to", this.url);
-
-      // Start mic as soon as socket connects
       startMicStream();
     };
 
@@ -48,10 +59,14 @@ class WebSocketManager {
     return this.socket;
   }
 
+  isOpen(): boolean {
+    return this.socket?.readyState === WebSocket.OPEN;
+  }
+
   close(): void {
     this.socket?.close();
   }
 }
 
-const wsManager = new WebSocketManager(`ws://${window.location.hostname}/ws`);
+const wsManager = new WebSocketManager();
 export default wsManager;
