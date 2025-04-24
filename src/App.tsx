@@ -25,7 +25,7 @@ const App: React.FC<{ toggleExpand: () => void }> = ({ toggleExpand }) => {
           </SidebarTrigger>
 
           <div className="max-w-10 h-auto">
-            <img src="/echo.png" alt="echo" />
+            <img src="/echo_logo_t.png" alt="echo" />
           </div>
 
           <TopSwitch />
