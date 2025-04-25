@@ -7,7 +7,9 @@ let processor: ScriptProcessorNode | null = null;
 export async function startMicStream(): Promise<void> {
   try {
     console.log("Mic started");
-    const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const stream: MediaStream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
     audioContext = new AudioContext({ sampleRate: 16000 });
 
     micStream = audioContext.createMediaStreamSource(stream);
@@ -18,20 +20,21 @@ export async function startMicStream(): Promise<void> {
 
     processor.onaudioprocess = (event: AudioProcessingEvent): void => {
       const pcmData: Float32Array = event.inputBuffer.getChannelData(0);
-      const int16Data: Int16Array = float32ToInt16(pcmData);
-      wsManager.send(int16Data.buffer); // use shared wsManager
-      console.log("Sending PCM chunk:", int16Data.length, "samples");
+      const uint8Data: Uint8Array = float32ToUint8(pcmData);
+      wsManager.send(uint8Data.buffer);
+      console.log("Sending PCM chunk:", uint8Data.length, "samples");
     };
   } catch (err) {
     console.error("Error accessing microphone:", err);
   }
 }
 
-function float32ToInt16(float32Array: Float32Array): Int16Array {
-  const int16Array = new Int16Array(float32Array.length);
+function float32ToUint8(float32Array: Float32Array): Uint8Array {
+  const uint8Array = new Uint8Array(float32Array.length);
   for (let i = 0; i < float32Array.length; i++) {
-    const sample = Math.max(-1, Math.min(1, float32Array[i]));
-    int16Array[i] = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+    // Clamp the float to -1..1 then map to 0..255
+    const clamped = Math.max(-1, Math.min(1, float32Array[i]));
+    uint8Array[i] = (clamped * 127 + 128) & 0xff;
   }
-  return int16Array;
+  return uint8Array;
 }

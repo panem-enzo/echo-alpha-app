@@ -5,7 +5,7 @@ import pyaudio
 # ====== Configuration ======
 SAMPLE_RATE = 16000        # ESP32-matching sample rate
 CHANNELS = 1               # Mono audio
-FORMAT = pyaudio.paInt16   # 16-bit PCM
+FORMAT = pyaudio.paInt8   # 8-bit PCM
 CHUNK_SIZE = 1024          # Number of samples per buffer
 
 # ====== Audio Output Setup ======
